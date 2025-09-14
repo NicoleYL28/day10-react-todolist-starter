@@ -13,13 +13,61 @@ code {
 }
 
 .todo-item {
-   width: 200px;
-   border: 1px solid black;
-   padding: 5px;
+  width: 280px;
+  min-height: 28px;
+  border: 1px solid rgb(219, 160, 93);
+  padding: 5px;
+  font-size: 1rem;
+  background: #fff;
+  border-radius: 6px;
+  margin: 8px;
 }
 .todo-item.done {
     text-decoration: line-through; 
+    border: 1px solid rgb(95, 95, 95);
+    color: #aaa;
+}
+.todo-item-row {
+  display: flex;
+  align-items: center;
 }
 .todo-group {
-   justify-self: center;
+  width: 50vw;
+  margin: 32px auto;
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button.add-btn {
+  background: #80b9f3;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 8px;
+}
+button.add-btn:hover {
+  background: #1565c0;
+}
+
+button.delete-btn {
+  background: #fff;
+  color: #d32f2f;
+  border: 1px solid #d32f2f;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin: 16px;
+}
+
+button.delete-btn:hover {
+  background: #d32f2f;
+  color: #fff;
 }

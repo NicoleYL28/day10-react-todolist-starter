@@ -23,7 +23,7 @@ const TodoList = () => {
   }
 
   return (<div className = {"todo-group"}> 
-      <div>This is the TodoList Component.</div>
+      <h1>Todo List</h1>
       {
         state.length === 0
           ? <div style={{margin: '16px 0', color: 'gray'}}>Add the things you need to do today...</div>
@@ -31,9 +31,9 @@ const TodoList = () => {
               console.log(todo)
               const {id, text, done} = todo;
               return (
-                <div style={{display: 'flex'}}>
+                <div className="todo-item-row">
                   <span className={`todo-item ${done ? 'done' : ''}`} onClick={() => toggleDone(id)}>{text}</span>
-                  <button onClick={() => deleteTodo(id)}>X</button>
+                  <button className='delete-btn' onClick={() => deleteTodo(id)}>X</button>
                 </div>
               );
             })
@@ -41,7 +41,7 @@ const TodoList = () => {
       {
         <div> 
         <input type="text" placeholder='Enter new todo here...' value={newTodoText} onChange={(e) => setNewTodoText(e.target.value)} />
-        <button onClick={addTodo}> Add </button>
+        <button className='add-btn' onClick={addTodo}> Add </button>
         </div>
       }
       </div>)
