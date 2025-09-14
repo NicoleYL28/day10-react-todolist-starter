@@ -17,6 +17,11 @@ const TodoList = () => {
     dispatch(action);
   }
 
+  function deleteTodo(id) {
+    const action = {type: 'DELETE', id: id};
+    dispatch(action);
+  }
+
   return (<div className = {"todo-group"}> 
       <div>This is the TodoList Component.</div>
       {
@@ -24,14 +29,17 @@ const TodoList = () => {
           console.log(todo)
           const {id, text, done} = todo;
           return (
-            <div className={`todo-item ${done ? 'done' : ''}`} onClick={() => toggleDone(id)}> {text} </div>
+            <div style={{display: 'flex'}}>
+              <span className={`todo-item ${done ? 'done' : ''}`} onClick={() => toggleDone(id)}>{text}</span>
+              <button onClick={() => deleteTodo(id)}>X</button>
+            </div>
           );
         })
       }
       {
         <div> 
         <input type="text" placeholder='Enter new todo here...' value={newTodoText} onChange={(e) => setNewTodoText(e.target.value)} />
-        <button onClick={addTodo}> Add Todo </button>
+        <button onClick={addTodo}> Add </button>
         </div>
       }
       </div>)
