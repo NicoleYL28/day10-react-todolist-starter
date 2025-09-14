@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.todo-item {
+   width: 200px;
+   border: 1px solid black;
+   padding: 5px;
+}
+.todo-item.done {
+    text-decoration: line-through; 
+}
+.todo-group {
+   justify-self: center;
+}
