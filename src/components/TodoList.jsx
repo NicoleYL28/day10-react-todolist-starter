@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { TodoContext } from '../contexts/TodoContext';
 import { useEffect } from "react";
-import { getTodos } from "../apis/api";
+import { getTodos, addTodo, deleteTodo} from "../apis/api";
 
 const TodoList = () => {
 
@@ -14,15 +14,32 @@ const TodoList = () => {
     dispatch(action);
   }
 
-  function addTodo() {
-    const action = {type: 'ADD', text: newTodoText};
-    dispatch(action);
-  }
+  // function addTodo() {
+  //   const action = {type: 'ADD', text: newTodoText};
+  //   dispatch(action);
+  // }
 
-  function deleteTodo(id) {
-    const action = {type: 'DELETE', id: id};
-    dispatch(action);
-  }
+  // function deleteTodo(id) {
+  //   const action = {type: 'DELETE', id: id};
+  //   dispatch(action);
+  // }
+
+  const handleSubmit = async () => {
+      if (newTodoText && newTodoText.trim()) {
+        const newTodo = { 
+          done: false,
+          text: newTodoText.trim()
+        }
+        const response = await addTodo(newTodo);
+        dispatch({ type: 'ADD', todo: response.data });
+        setNewTodoText('');
+      }
+    }
+
+  const handleDelete = async (id) => {
+    await deleteTodo(id);
+    dispatch({ type: 'DELETE', id });
+  };
 
   useEffect( () => {
     getTodos().then( response => {
@@ -41,7 +58,7 @@ const TodoList = () => {
               return (
                 <div className="todo-item-row">
                   <span className={`todo-item ${done ? 'done' : ''}`} onClick={() => toggleDone(id)}>{text}</span>
-                  <button className='delete-btn' onClick={() => deleteTodo(id)}>X</button>
+                  <button className='delete-btn' onClick={() => handleDelete(id)}>X</button>
                 </div>
               );
             })
@@ -49,7 +66,7 @@ const TodoList = () => {
       {
         <div> 
         <input type="text" placeholder='Enter new todo here...' value={newTodoText} onChange={(e) => setNewTodoText(e.target.value)} />
-        <button className='add-btn' onClick={addTodo}> Add </button>
+        <button className='add-btn' onClick={handleSubmit}> Add </button>
         </div>
       }
       </div>)
