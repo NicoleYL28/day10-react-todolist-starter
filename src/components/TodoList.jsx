@@ -1,18 +1,18 @@
 import { useContext, useState } from 'react';
 import { TodoContext } from '../contexts/TodoContext';
 import { useEffect } from "react";
-import { getTodos, addTodo, deleteTodo} from "../apis/api";
+import { getTodos, addTodo, deleteTodo, toggleTodoDone} from "../apis/api";
 
 const TodoList = () => {
 
   const {state, dispatch} = useContext(TodoContext);
   const [newTodoText, setNewTodoText] = useState('');
 
-  function toggleDone(id){
-    console.log("toggle done for id:", id);
-    const action = {type: 'DONE', id: id};
-    dispatch(action);
-  }
+  // function toggleDone(id){
+  //   console.log("toggle done for id:", id);
+  //   const action = {type: 'DONE', id: id};
+  //   dispatch(action);
+  // }
 
   // function addTodo() {
   //   const action = {type: 'ADD', text: newTodoText};
@@ -24,6 +24,12 @@ const TodoList = () => {
   //   dispatch(action);
   // }
 
+  const toggleDone = async (id) => {
+    console.log("toggle done for id:", id);
+    const response = await toggleTodoDone(id);
+    dispatch({ type: 'DONE', id: response.data.id });
+  }
+
   const handleSubmit = async () => {
       if (newTodoText && newTodoText.trim()) {
         const newTodo = { 
@@ -34,11 +40,11 @@ const TodoList = () => {
         dispatch({ type: 'ADD', todo: response.data });
         setNewTodoText('');
       }
-    }
+  }; 
 
   const handleDelete = async (id) => {
     await deleteTodo(id);
-    dispatch({ type: 'DELETE', id });
+    dispatch({ type: 'DELETE', id: id });
   };
 
   useEffect( () => {
