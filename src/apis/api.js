@@ -19,3 +19,7 @@ export const deleteTodo = async (id) => {
 export const toggleTodoDone = async (id, done) => {
     return instance.put(`/todos/${id}`, { done });
 };
+
+export const updateTodo = async (id, text) => {
+    return instance.put(`/todos/${id}`, { text });
+};
