@@ -1,3 +1,4 @@
+
 export const initialState = [
   // {id: 1, text: "the first todo", done: false},
   // {id: 2, text: "the second todo", done: false},
@@ -5,6 +6,8 @@ export const initialState = [
 
 // reducer is a pure function that define and gather all state update logic
 export const todoReducer = (state, action) => {
+
+  
 
   switch (action.type) {
     case 'DONE': 
@@ -21,6 +24,8 @@ export const todoReducer = (state, action) => {
         return [...state, newTodo];
       case 'DELETE':
           return state.filter(todo => todo.id !== action.id);
+      case 'LOAD_TODOS':
+          return action.todos;
     default:
       return state;
   }

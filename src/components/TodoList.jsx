@@ -1,5 +1,7 @@
 import { useContext, useState } from 'react';
 import { TodoContext } from '../contexts/TodoContext';
+import { useEffect } from "react";
+import { getTodos } from "../apis/api";
 
 const TodoList = () => {
 
@@ -21,6 +23,12 @@ const TodoList = () => {
     const action = {type: 'DELETE', id: id};
     dispatch(action);
   }
+
+  useEffect( () => {
+    getTodos().then( response => {
+      dispatch({type: 'LOAD_TODOS', todos: response.data});
+    })
+  }, []);
 
   return (<div className = {"todo-group"}> 
       <h1>Todo List</h1>
