@@ -3,7 +3,7 @@ import './App.css';
 import TodoList from "./components/TodoList";
 import { initialState, todoReducer } from "./reducers/todoReducer";
 import { TodoContext } from "./contexts/TodoContext";
-import { createBrowserRouter, NavLink, Outlet, RouterProvider } from "react-router";
+import { createBrowserRouter, NavLink, Outlet, RouterProvider, useParams } from "react-router";
 
 function DefaultLayout() {
   return <>
@@ -24,6 +24,12 @@ function DefaultLayout() {
   </>;
 }
 
+function TodoDetail() {
+  const {key} = useParams();
+  console.log("key:", key);
+  return <h3> This is todo detail for {key}: </h3>;
+}
+
 function Error() {
   return <div> 404 Not Found </div>;
 }
@@ -39,6 +45,10 @@ const route = [
     },{
       path: 'todos',
       element: <TodoList/>
+    },
+    {
+      path: 'todoDetail/:key',
+      element: <TodoDetail/>
     },
     {
       path: 'about',
